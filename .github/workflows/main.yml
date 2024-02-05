@@ -1,0 +1,38 @@
+on: 
+  push:
+    branches: [master]
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Get assignment name"
+        shell: bash -l {0}
+        run: |
+          echo "ASSIGNMENT=$(echo $GITHUB_REPOSITORY | cut -d/ -f2 | cut -d- -f1)" >> $GITHUB_ENV;
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: "Fetch environment file" 
+        shell: bash -l {0}
+        run: |
+          curl \
+          --header 'Authorization: token ${{secrets.PGE383_SECRET_TOKEN}}' \
+          --header 'Accept: application/vnd.github.v3.raw' \
+          -O --location "https://api.github.com/repos/PGE383-HPC/${ASSIGNMENT}-solution/contents/environment.yml"
+      - name: "Install environment"
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: environment.yml
+      - name: "Fetch tests" 
+        shell: bash -l {0}
+        run: |
+          curl \
+          --header 'Authorization: token ${{secrets.PGE383_SECRET_TOKEN}}' \
+          --header 'Accept: application/vnd.github.v3.raw' \
+          -O --location "https://api.github.com/repos/PGE383-HPC/${ASSIGNMENT}-solution/contents/test.py"
+      - name: "Run Tests" 
+        shell: bash -l {0}
+        run: |
+          ./install.sh 
+          source ~/.bash_profile
+          alias lla > lla.txt
+          python -m unittest test.py -vvv
