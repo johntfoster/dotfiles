@@ -1,6 +1,6 @@
 # Assignment 6
 
-![Assignment 6](https://github.com/PGE383-HPC/assignment6/actions/workflows/main.yml/badge.svg)
+![Assignment 6](https://github.com/PGE383-HPC/assignment6-johntfoster/actions/workflows/main.yml/badge.svg)
 
 
 ## Instructions
