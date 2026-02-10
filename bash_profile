@@ -9,6 +9,3 @@ if [ -f $HOME/.bashrc ]; then
 fi
 
 set -o vi
-
-# Custom aliases
-alias lla='ls -la'
