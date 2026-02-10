@@ -5,5 +5,8 @@ script_dir=$(dirname "$(readlink -f "$0")")
 rm -rf $HOME/.bash_profile
 rm -rf $HOME/.bashrc
 
-ln -s $script_dir/bash_profile $HOME/.bash_profile
-ln -s $script_dir/bashrc $HOME/.bashrc
+cp $HOME/.bash_profile $HOME/.bash_profile_backup 2>/dev/null || true
+cp $HOME/.bashrc $HOME/.bashrc_backup 2>/dev/null || true
+
+ln -sf $script_dir/bash_profile $HOME/.bash_profile
+ln -sf $script_dir/bashrc $HOME/.bashrc
