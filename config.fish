@@ -43,6 +43,8 @@ if test -n "$MANPATH[1]"; set --global --export MANPATH '' $MANPATH; end;
 if not contains "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH; set --global --export INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH; end;
 
 # OpenClaw Completion
-source "/home/john/.openclaw/completions/openclaw.fish"
+if test -f "/home/john/.openclaw/completions/openclaw.fish"
+    source "/home/john/.openclaw/completions/openclaw.fish"
+end
 
 # Overleaf Git token for overleaf-pi
