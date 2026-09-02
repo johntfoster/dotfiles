@@ -1,6 +1,13 @@
 fish_vi_key_bindings
 set -g theme_color_scheme zenburn
 
+# User-installed command-line tools.
+for dir in $HOME/.npm-global/bin $HOME/.local/bin $HOME/bin
+    if test -d $dir
+        fish_add_path --global --move $dir
+    end
+end
+
 set -x BAZEAN_POSTGRES_USERNAME student01
 set -x EDITOR 'nvim'
 set -x NVIM_LISTEN_ADDRESS '/tmp/nvimsocket'
